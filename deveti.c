@@ -228,27 +228,3 @@ int main()
 	return 0;
 }
 
-
-
-int dodaj_na_file(stog_pozicija head, pozicija root, char* name)
-{
-	FILE* pfile = NULL;
-
-	pfile = fopen(name, "a");
-	if (!pfile)
-	{
-		perror("Failed opening of the file!\n");
-		return -1;
-	}
-
-	while (head->sljedeci)
-	{
-		fprintf(pfile, "%d ", head->sljedeci->element);
-		pop_stog(head);
-	}
-
-	fprintf(pfile, "\n");
-
-	fclose(pfile);
-
-	return 0;
