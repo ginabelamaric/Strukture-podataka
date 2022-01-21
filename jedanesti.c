@@ -38,6 +38,8 @@ int  pronadi_drzavu(cvor HashTablica[], char* drzava, int br);
 int hash_tablica(cvor HashTablica[], position new);
 int hash_br(char* drzava);
 int init_liste(pozicija head);
+int brisi_stablo(position trenutni);
+int brisi_listu(pozicija head);
 
 int main()
 {
@@ -284,6 +286,28 @@ int hash_tablica(cvor HashTablica[], position new)
 	int num = hash_br(new->name);
 
 	ubaci_sort(new, &HashTablica[num]);
+
+	return 0;
+}
+int brisi_listu(pozicija head)
+{
+	pozicija toDelete = NULL;
+	while (head->sljedeci != NULL)
+{
+		toDelete = head->sljedeci;
+		brisi_stablo(head->sljedeci->root);
+	head->sljedeci = toDelete->sljedeci;
+	free(toDelete);
+}
+return 0;
+}
+int brisi_stablo(position trenutni)
+{
+	if (trenutni == NULL)
+		return 0;
+	brisi_stablo(trenutni->livi);
+	brisi_stablo(trenutni->desni);
+	free(trenutni);
 
 	return 0;
 }
